@@ -98,13 +98,35 @@ bool LinkedList<T>::removeBack()
 {
 	Node<T>* lastNode = nullptr;
 	Node<T>* secondintoLast = nullptr;
-	bool isRemoved = false;
+	
+	// is the list empty?
+	if ( m_front == nullptr )
+	{
+		return ( false );
+	}
+	
+	// does the list only have 1 item ?
+	if ( m_front->getNext() == nullptr )
+	{
+		delete m_front;
+		m_front = nullptr;
+		return true;
+	}
+	
+	// list has more than 1 item, lets itterate and get the last 2.
+	for ( secondintoLast = m_front, 		// start looking at the front
+	      lastNode = m_front->getNext();		// and the second list members.
+	      lastNode->getNext() != nullptr;		// if we are not at the end
+	      secondintoLast = lastNode,		// move forward one
+	      lastNode = secondintoLast->getNext()	// get the new end maybe.
+	);
+	
+	// now we have the last and second to last.
+	// free up the last node and make the second to last the last.
+	delete lastNode;
+	secondintoLast->setNext( nullptr );
 
-	/** TODO 
-		Fix this method
-	*/
-
-	return(isRemoved);
+	return( true );
 }	
 
 template <typename T>
