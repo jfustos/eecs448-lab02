@@ -36,13 +36,22 @@ template <typename T>
 bool LinkedList<T>::search(T value) const
 {
 	Node<T>* temp = m_front;
-	bool isFound = false;
+	
+	// keep going through list until end
+	while( temp != nullptr )
+	{
+		// if we found it then get otta here.
+		if( temp->getValue() == value )
+		{
+			return true;
+		}
+		
+		// if not move to the next.
+		temp = temp->getNext();
+	}
 
-	/** TODO 
-		Fix this method
-	*/
-
-	return(isFound);
+	// we didn't find it :(
+	return false;
 }
 
 template <typename T>
